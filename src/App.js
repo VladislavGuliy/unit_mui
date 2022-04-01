@@ -1,8 +1,17 @@
 import './App.css';
+import React from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import { AppBar, Container, Toolbar, IconButton, Typography, Box, Paper, Grid, CardMedia, CardContent, Card, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+
+import FolderIcon from '@material-ui/icons/Folder';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled.js';
 import LayerIcon from '@material-ui/icons/Layers.js';
 
@@ -54,6 +63,11 @@ const cards=[1,2,3,4,5,6,7,8,9];
 function App() {
   
   const classes = useStyles();
+  const [value, setValue]=React.useState("recents");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <>
@@ -178,8 +192,41 @@ function App() {
           </Grid>
         </Container>
     </main>
-
-
+    <footer>
+      <Typography variant='h6' align='center' gutterBottom >
+        Footer
+      </Typography>
+      <BottomNavigation
+        value={value}
+        onChange={handleChange}
+        className={classes.root}
+      
+      >
+        <BottomNavigationAction
+          label="Recents"
+          value="recents"
+          icon={<RestoreIcon />}
+        />
+        <BottomNavigationAction
+          label="Favorites"
+          value="favorites"
+          icon={<FavoriteIcon />}
+        />
+        <BottomNavigationAction
+          label="Nearby"
+          value="nearby"
+          icon={<LocationOnIcon />}
+        />
+        <BottomNavigationAction
+          label="Folder"
+          value="folder"
+          icon={<FolderIcon />}
+        />
+      </BottomNavigation>
+      <Typography align='center' color='textSecondary' component="p" variant="subtitle1">
+        Web Developer Blog JS Material-UI site 
+      </Typography>
+    </footer>
     </>
   )
 }
